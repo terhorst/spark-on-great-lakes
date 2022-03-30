@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name=spark-cluster-with-jupyter
-#SBATCH --account=support        # change to your account
+#SBATCH --account=stats507w22_class        # change to your account
 #SBATCH --partition=standard
 #SBATCH --nodes=1                # node count, change as needed
 #SBATCH --ntasks-per-node=1      # do not change, leave as 1 task per node
@@ -25,4 +25,6 @@ pyspark --master ${SPARK_MASTER_URL} \
   --driver-memory 10G \
   --executor-cores 1 \
   --executor-memory 5G \
-  --total-executor-cores 70
+  --total-executor-cores 70 \
+  --conf spark.driver.maxResultSize=5g \
+  --packages graphframes:graphframes:0.8.1-spark3.0-s_2.12
